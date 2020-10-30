@@ -40,12 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // p tag with how many likes that toy has 
         // button tag with a class "like-btn"
 
-  const container = document.querySelector('#toy-collection')
+
 
   function renderOneToy (toyObject) {
    
     const card = document.createElement('div')
     card.className = 'card'
+    card.dataset.id = toyObject.id
     card.innerHTML = `
       <h2>
       ${toyObject.name}
@@ -78,33 +79,26 @@ document.addEventListener("DOMContentLoaded", () => {
       likes: 0
     }
 
-   
     
-  //   let configObj = {
-  //     method: "POST",
-  //     headers: {
-  //     "Content-Type": "application/json",
-  //     "Accept": "application/json"
-  //   },
-  //   body: JSON.stringify(formData)
-  // }
+    let configObj = {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(toyObj)
+    }
   
   
-    // return fetch('http://localhost:3000/toys', configObj)
-    // .then(function (resp) { 
-    //   return resp.json()
-    // })
-    // .then(function (obj) {
-    //    console.log(obj)
-    //    document.body.innerHTML = obj.id + ' - ' + obj.name + ' - ' + obj.email
-    // })
-    // .catch(function (error) {
-    //   alert("Bad things! Ragnarők!");
-    //   console.log(error.message);
-    //   document.body.innerHTML = error.message
-    // });
+    fetch('http://localhost:3000/toys', configObj)
+    .then(resp => {
+      resp.json()
+      debugger
+    })
+    .then(function (obj) {
+       console.log(obj)
+    })
   }
-
   
 //INCREASE TOY'S LIKES
   //increaseToyLikes function (e) {}
@@ -116,4 +110,31 @@ document.addEventListener("DOMContentLoaded", () => {
   //PATCH request to http://localhost:3000/toys
 
   //event listener for like button pass increaseToyLikes as 2nd argument
+
+  const container = document.querySelector('#toy-collection')
+  container.addEventListener("click", increaseToyLikes)
+  
+  function increaseToyLikes(event) {
+    // console.log(event.target)
+    if (event.target.matches('.like-btn')) {
+      //card parent
+      const card = event.target.closest('.card')
+      //card id
+      const id = card.dataset.id
+      console.log(id)
+      //card likes
+      
+
+      // const likesP = card.getElementsByTagName('p')
+      // console.log(likesP)
+      //  const newLikes = Array.from(likesP)
+      // // parseInt(likesP.textContent) + 1
+      //   console.log(newLikes)
+
+      //   const text = newLikes.innerText
+      //   console.log(text)
+      
+    }
+  }
+
 

@@ -47,6 +47,24 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "Shrek",
+      "image": "https://img1.looper.com/img/gallery/things-only-adults-notice-in-shrek/intro-1573597941.jpg",
+      "likes": 0,
+      "id": 9
+    },
+    {
+      "name": "Shrek",
+      "image": "https://img1.looper.com/img/gallery/things-only-adults-notice-in-shrek/intro-1573597941.jpg",
+      "likes": 0,
+      "id": 10
+    },
+    {
+      "name": "Shrek",
+      "image": "https://img1.looper.com/img/gallery/things-only-adults-notice-in-shrek/intro-1573597941.jpg",
+      "likes": 0,
+      "id": 11
     }
   ]
 }
