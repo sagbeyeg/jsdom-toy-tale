@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <img class="toy-avatar" src="${toyObject.image}" alt="${toyObject.name}">
 
-      <p>${toyObject.likes} likes</p>
+      <p class="likes">${toyObject.likes} likes</p>
       
       
-      <button class="like-btn">Like</button>
+      <button class="like-btn">❤️Like❤️</button>
     `
       
     container.append(card)
@@ -123,18 +123,38 @@ document.addEventListener("DOMContentLoaded", () => {
       const id = card.dataset.id
       console.log(id)
       //card likes
-      
+      const likes = card.querySelector(".likes")
+      console.log (likes)
+      const currentLikes = parseInt(likes.innerHTML)
+      //new likes
+      const newLikes = currentLikes + 1
+      console.log (newLikes)
 
-      // const likesP = card.getElementsByTagName('p')
-      // console.log(likesP)
-      //  const newLikes = Array.from(likesP)
-      // // parseInt(likesP.textContent) + 1
-      //   console.log(newLikes)
+      likes.innerHTML = `${newLikes} likes`
 
-      //   const text = newLikes.innerText
-      //   console.log(text)
-      
+      updatedLikes(newLikes, id)
     }
+  }
+  function updatedLikes(newLikes, id) {
+    let configObj = {
+      method: "PATCH",
+      headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+      },
+      body: JSON.stringify({
+      "likes": newLikes
+      })
+    }
+  
+  
+    fetch(`http://localhost:3000/toys/${id}`, configObj)
+    .then(resp => {
+      resp.json()
+    })
+    .then(function (obj) {
+       console.log(obj)
+    })
   }
 
 
