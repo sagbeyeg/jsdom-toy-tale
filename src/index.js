@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function init () {
     fetch('http://localhost:3000/toys')
     .then(response => response.json())  
-    .then(data => renderAllToys(data));
+    .then(toyData => renderAllToys(toyData));
   }
 
   init()
@@ -29,27 +29,36 @@ document.addEventListener("DOMContentLoaded", () => {
   //renderAllToys function
     //iterate through toys
 
-  function renderAllToys (data) {
-    data.forEach(toy => renderOneToy(toy)
-      // console.log(toy)
-    )
+  function renderAllToys (toyData) {
+    toyData.forEach(toy => renderOneToy(toy))
   }
   //renderOneToy function
       //grabs renderAllToys
-      //ADD TOY INFO TO THE CARD: pushes into <div class="card">
+      //ADD TOY INFO TO THE CARD: pushes into  class="card">
         //h2 tag with the toy's name
         // img tag with the src of the toy's image attribute and the class name "toy-avatar"
-        // p tag with how many likes that toy has
+        // p tag with how many likes that toy has 
         // button tag with a class "like-btn"
 
   const container = document.querySelector('#toy-collection')
 
-  function renderOneToy (toy) {
+  function renderOneToy (toyObject) {
+   
     const card = document.createElement('div')
     card.className = 'card'
-      card.forEach() {
+    card.innerHTML = `
+      <h2>
+      ${toyObject.name}
+      </h2>
 
-      }
+      <img class="toy-avatar" src="${toyObject.image}" alt="${toyObject.name}">
+
+      <p>${toyObject.likes} likes</p>
+      
+      
+      <button class="like-btn">Like</button>
+    `
+      
     container.append(card)
   }
 
@@ -57,6 +66,45 @@ document.addEventListener("DOMContentLoaded", () => {
   //POST REQUEST to http://localhost:3000/toys
   //method: POST for FETCH
   //var for stringify -> defined in our renderOneToy
+  const formData = document.querySelector('.add-toy-form')
+  formData.addEventListener("submit", addNewToy)
+
+  function addNewToy (event) {
+    event.preventDefault
+
+    const toyObj = {
+      name: event.target.name.value,
+      image: event.target.image.value,
+      likes: 0
+    }
+
+   
+    
+  //   let configObj = {
+  //     method: "POST",
+  //     headers: {
+  //     "Content-Type": "application/json",
+  //     "Accept": "application/json"
+  //   },
+  //   body: JSON.stringify(formData)
+  // }
+  
+  
+    // return fetch('http://localhost:3000/toys', configObj)
+    // .then(function (resp) { 
+    //   return resp.json()
+    // })
+    // .then(function (obj) {
+    //    console.log(obj)
+    //    document.body.innerHTML = obj.id + ' - ' + obj.name + ' - ' + obj.email
+    // })
+    // .catch(function (error) {
+    //   alert("Bad things! Ragnarők!");
+    //   console.log(error.message);
+    //   document.body.innerHTML = error.message
+    // });
+  }
+
   
 //INCREASE TOY'S LIKES
   //increaseToyLikes function (e) {}
