@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(function (obj) {
        console.log(obj)
+       event.target.reset()
     })
   }
   
@@ -135,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
       updatedLikes(newLikes, id)
     }
   }
+
+
   function updatedLikes(newLikes, id) {
     let configObj = {
       method: "PATCH",
