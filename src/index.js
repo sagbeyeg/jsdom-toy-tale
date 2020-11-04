@@ -68,14 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
   //method: POST for FETCH
   //var for stringify -> defined in our renderOneToy
   const formData = document.querySelector('.add-toy-form')
-  formData.addEventListener("submit", addNewToy)
+  formData.addEventListener("submit", event => {
+    event.preventDefault()
+    addNewToy(event)
+  })
 
-  function addNewToy (event) {
-    event.preventDefault
+  function addNewToy (toy) {
+    // event.preventDefault
 
     const toyObj = {
-      name: event.target.name.value,
-      image: event.target.image.value,
+      name: toy.target.name.value,
+      image: toy.target.image.value,
       likes: 0
     }
 
@@ -93,11 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('http://localhost:3000/toys', configObj)
     .then(resp => {
       resp.json()
-      debugger
+      // debugger
     })
     .then(function (obj) {
        console.log(obj)
-       event.target.reset()
+       toy.target.reset()
     })
   }
   
@@ -152,12 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {
   
   
     fetch(`http://localhost:3000/toys/${id}`, configObj)
-    .then(resp => {
-      resp.json()
-    })
-    .then(function (obj) {
-       console.log(obj)
-    })
+      .then(resp => {
+        resp.json()
+      })
+      .then(function (obj) {
+        console.log(obj)
+      })
   }
 
 
